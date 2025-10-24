@@ -18,13 +18,13 @@ public class EntriesService {
         this.entriesRepository = entriesRepository;
     }
 
-    public List<EntriesModel> getEntries1() {
+    public List<Entries> getEntries1() {
         return entriesRepository.findAll();
     }
 
-    public List<EntriesModel> getEntries2() {
+    public List<Entries> getEntries2() {
         return List.of(
-                new EntriesModel(
+                new Entries(
                         1,
                         222,
                         22,
@@ -34,15 +34,10 @@ public class EntriesService {
         );
     }
 
-    public void addNewEntries(EntriesModel entriesModel) {
-        Optional<EntriesModel> entriesById = entriesRepository.
-                findById(entriesModel.getEntriesId());
-        if (entriesById.isPresent()) {
-            throw new IllegalStateException("id is already taken");
-        } else {
-            entriesRepository.save(entriesModel);
-        }
+    public void addNewEntries(Entries entries) {
+            entriesRepository.save(entries);
     }
+
     public void deleteEntries(Integer entriesId) {
         boolean exists = entriesRepository.existsById(entriesId);
         if (!exists) {
@@ -61,33 +56,33 @@ public class EntriesService {
             String dateOfentry,
             String hourOfEntry) {
 
-        EntriesModel entriesModel = entriesRepository.findById(entriesId)
+        Entries entries = entriesRepository.findById(entriesId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Entry with id " + entriesId + " does not exist"));
 
 
         if (consumerId != null &&
                 consumerId > 0 &&
-                !Objects.equals(entriesModel.getConsumerId(), consumerId)) {
-            entriesModel.setConsumerId(consumerId);
+                !Objects.equals(entries.getConsumerId(), consumerId)) {
+            entries.setConsumerId(consumerId);
         }
 
         if (projectId != null &&
                 projectId > 0 &&
-                !Objects.equals(entriesModel.getProjectId(), projectId)) {
-            entriesModel.setProjectId(projectId);
+                !Objects.equals(entries.getProjectId(), projectId)) {
+            entries.setProjectId(projectId);
         }
 
         if (dateOfentry != null &&
                 dateOfentry.length() > 0 &&
-                !Objects.equals(entriesModel.getDateOfentry(), dateOfentry)) {
-            entriesModel.setDateOfentry(dateOfentry);
+                !Objects.equals(entries.getDateOfentry(), dateOfentry)) {
+            entries.setDateOfentry(dateOfentry);
         }
 
         if (hourOfEntry != null &&
                 hourOfEntry.length() > 0 &&
-                !Objects.equals(entriesModel.getHourOfEntry(), hourOfEntry)) {
-            entriesModel.setHourOfEntry(hourOfEntry);
+                !Objects.equals(entries.getHourOfEntry(), hourOfEntry)) {
+            entries.setHourOfEntry(hourOfEntry);
         }
     }
 

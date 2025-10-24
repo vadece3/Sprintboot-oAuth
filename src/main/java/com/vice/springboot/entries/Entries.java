@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data // generates getters, setters, equals, hashCode, toString
 @NoArgsConstructor // generates a no-args constructor (required by JPA)
 @AllArgsConstructor // generates a constructor with all fields
-public class EntriesModel {
+public class Entries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY
     )
@@ -22,10 +22,10 @@ public class EntriesModel {
     private String hourOfEntry;
 
 
-    public EntriesModel(Integer consumerId,
-                        Integer projectId,
-                        String dateOfentry,
-                        String hourOfEntry) {
+    public Entries(Integer consumerId,
+                   Integer projectId,
+                   String dateOfentry,
+                   String hourOfEntry) {
 
         this.consumerId=consumerId;
         this.projectId=projectId;

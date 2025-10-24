@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectRepository
-        extends JpaRepository<ProjectModel, Integer> {
+        extends JpaRepository<Project, Integer> {
 }

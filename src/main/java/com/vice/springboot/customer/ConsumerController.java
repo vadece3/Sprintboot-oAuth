@@ -1,9 +1,14 @@
 package com.vice.springboot.customer;
 
+import com.vice.springboot.Role.Role;
+import com.vice.springboot.Role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -16,29 +21,40 @@ public class ConsumerController {
 //	}
 //
     private final ConsumerService consumerService;
+    private final ConsumerRepository consumerRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public ConsumerController(ConsumerService consumerService) {
+    public ConsumerController(ConsumerRepository consumerRepository, ConsumerService consumerService, RoleRepository roleRepository) {
+
+        this.consumerRepository = consumerRepository;
         this.consumerService = consumerService;
+        this.roleRepository = roleRepository;
     }
 
     @RequestMapping(path = "api/v1/consumer1")
     @GetMapping
-    public List<ConsumerModel> getConsumer1() {
+    public List<Consumer> getConsumer1() {
         return consumerService.getConsumer1();
-    }
-
-    @RequestMapping(path = "api/v1/consumer2")
-    @GetMapping
-    public List<ConsumerModel> getConsumer2() {
-        return consumerService.getConsumer2();
     }
 
     @RequestMapping(path = "api/v1/storeNewConsumer")
     @PostMapping
-    public String postConsumer(@RequestBody ConsumerModel consumerModel) {
-        consumerService.addNewConsumer(consumerModel);
-        return "New Cosumer Added";
+    public ResponseEntity<Consumer> createConsumer(@RequestBody ConsumerRequest consumerRequest) {
+        Consumer consumer = new Consumer();
+        consumer.setCustomerName(consumerRequest.getCustomerName());
+        consumer.setCustomerCity(consumerRequest.getCustomerCity());
+        consumer.setContactsPerson(consumerRequest.getContactsPerson());
+        consumer.setCustomerAddress(consumerRequest.getCustomerAddress());
+        consumer.setGeolocalisation(consumerRequest.getGeolocalisation());
+        consumer.setDateOfBirth(consumerRequest.getDateOfBirth());
+
+        // Fetch roles by IDs
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(consumerRequest.getRoleIds()));
+        consumer.setRoles(roles);
+
+        Consumer saved = consumerRepository.save(consumer);
+        return ResponseEntity.ok(saved);
     }
 
     @RequestMapping(path = "api/v1/deleteconsumer/{consumerId}")

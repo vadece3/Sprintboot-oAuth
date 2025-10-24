@@ -18,17 +18,16 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    public List<ProjectModel> getProject1() {
+    public List<Project> getProject1() {
         return projectRepository.findAll();
     }
 
-    public List<ProjectModel> getProject2() {
+    public List<Project> getProject2() {
         return List.of(
-                new ProjectModel(
-                        1,
-                        222,
-                        22,
+                new Project(
                         "testproject",
+                        22,
+                        222,
                         "0",
                         "0",
                         "not_done"
@@ -36,20 +35,15 @@ public class ProjectService {
         );
     }
 
-    public void addNewProject(ProjectModel projectModel) {
-        Optional<ProjectModel> projectById = projectRepository.
-                findById(projectModel.getId());
-        if (projectById.isPresent()) {
-            throw new IllegalStateException("id is already taken");
-        } else {
-            projectRepository.save(projectModel);
-        }
+    public void addNewProject(Project project) {
+            projectRepository.save(project);
     }
+
     public void deleteProject(Integer projectId) {
         boolean exists = projectRepository.existsById(projectId);
         if (!exists) {
             throw new IllegalStateException(
-                    "EntriesModel with id " + projectId + " does not exists");
+                    "Entries with id " + projectId + " does not exists");
         } else {
             projectRepository.deleteById(projectId);
         }
@@ -65,45 +59,45 @@ public class ProjectService {
             String endDate,
             String Status) {
 
-        ProjectModel projectModel = projectRepository.findById(projectId)
+        Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "projectModel with id " + projectId + " does not exist"));
+                        "project with id " + projectId + " does not exist"));
 
 
         if (projectName != null &&
                 projectName.length() > 0 &&
-                !Objects.equals(projectModel.getProjectName(), projectName)) {
-            projectModel.setProjectName(projectName);
+                !Objects.equals(project.getProjectName(), projectName)) {
+            project.setProjectName(projectName);
         }
 
         if (consultantId != null &&
                 consultantId > 0 &&
-                !Objects.equals(projectModel.getConsultantId(), consultantId)) {
-            projectModel.setConsultantId(consultantId);
+                !Objects.equals(project.getConsultantId(), consultantId)) {
+            project.setConsultantId(consultantId);
         }
 
         if (consumerId != null &&
                 consumerId > 0 &&
-                !Objects.equals(projectModel.getConsumerId(), consumerId)) {
-            projectModel.setConsumerId(consumerId);
+                !Objects.equals(project.getConsumerId(), consumerId)) {
+            project.setConsumerId(consumerId);
         }
 
         if (startDate != null &&
                 startDate.length() > 0 &&
-                !Objects.equals(projectModel.getStartDate(), startDate)) {
-            projectModel.setStartDate(startDate);
+                !Objects.equals(project.getStartDate(), startDate)) {
+            project.setStartDate(startDate);
         }
 
         if (endDate != null &&
                 endDate.length() > 0 &&
-                !Objects.equals(projectModel.getEndDate(), endDate)) {
-            projectModel.setEndDate(endDate);
+                !Objects.equals(project.getEndDate(), endDate)) {
+            project.setEndDate(endDate);
         }
 
         if (Status != null &&
                 Status.length() > 0 &&
-                !Objects.equals(projectModel.getStatus(), Status)) {
-            projectModel.setStatus(Status);
+                !Objects.equals(project.getStatus(), Status)) {
+            project.setStatus(Status);
         }
 
     }

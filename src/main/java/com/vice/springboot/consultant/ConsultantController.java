@@ -24,20 +24,20 @@ public class ConsultantController {
 
     @RequestMapping(path = "api/v1/consultant1")
     @GetMapping
-    public List<ConsultantModel> getConsultant1() {
+    public List<Consultant> getConsultant1() {
         return consultantService.getConsultant1();
     }
 
     @RequestMapping(path = "api/v1/consultant2")
     @GetMapping
-    public List<ConsultantModel> getConsultant2() {
+    public List<Consultant> getConsultant2() {
         return consultantService.getConsultant2();
     }
 
     @RequestMapping(path = "api/v1/storeNewConsultant")
     @PostMapping
-    public String postConsultant(@RequestBody ConsultantModel consultantModel) {
-        consultantService.addNewConsultant(consultantModel);
+    public String postConsultant(@RequestBody Consultant consultant) {
+        consultantService.addNewConsultant(consultant);
         return "New Consultant Added";
     }
 

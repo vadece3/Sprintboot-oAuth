@@ -12,25 +12,25 @@ public class ConsumerConfig {
     @Bean
     CommandLineRunner consumerCommandLineRunner(ConsumerRepository repository) {
         return args -> {
-            ConsumerModel testuser = new ConsumerModel(
-                    "testuser",
-                    "Bayern",
-                    "",
-                    "",
-                    "",
-                    ""
-            );
+//            Consumer testuser = new Consumer(
+//                    "testuser",
+//                    "Bayern",
+//                    "",
+//                    "",
+//                    "",
+//                    ""
+//            );
+//
+//            Consumer Admin = new Consumer(
+//                    "Admin",
+//                    "Braunschweig",
+//                    "",
+//                    "",
+//                    "",
+//                    ""
+//            );
 
-            ConsumerModel Admin = new ConsumerModel(
-                    "Admin",
-                    "Braunschweig",
-                    "",
-                    "",
-                    "",
-                    ""
-            );
-
-            repository.saveAll(List.of(Admin, testuser));
+//            repository.saveAll(List.of(Admin, testuser));
         };
     }
 

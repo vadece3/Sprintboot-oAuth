@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsumerRepository
-        extends JpaRepository<ConsumerModel, Integer> {
+        extends JpaRepository<Consumer, Integer> {
 
 }

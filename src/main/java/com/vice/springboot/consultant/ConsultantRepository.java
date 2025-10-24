@@ -8,11 +8,11 @@ import java.util.Optional;
 
 @Repository
 public interface ConsultantRepository
-        extends JpaRepository<ConsultantModel, Integer> {
+        extends JpaRepository<Consultant, Integer> {
 
 
     //SELECT * FROM consultant WHERE consultantName = ?
-    @Query("SELECT c FROM ConsultantModel c WHERE c.consultantName = ?1")
-    Optional<ConsultantModel> findByConsultantName(String consultantName);
+    @Query("SELECT c FROM Consultant c WHERE c.consultantName = ?1")
+    Optional<Consultant> findByConsultantName(String consultantName);
 
 }

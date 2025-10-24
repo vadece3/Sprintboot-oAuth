@@ -12,14 +12,14 @@ public class ConsultantConfig {
     @Bean
     CommandLineRunner consultantCommandLineRunner(ConsultantRepository repository) {
         return args -> {
-            ConsultantModel testconsultant = new ConsultantModel(
+            Consultant testconsultant = new Consultant(
                     "testconsultant",
                     "not_available",
                     "",
                     0
             );
 
-            repository.saveAll(List.of(testconsultant));
+//            repository.saveAll(List.of(testconsultant));
         };
     }
 

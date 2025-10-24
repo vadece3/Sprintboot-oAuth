@@ -18,14 +18,13 @@ public class ConsultantService {
         this.consultantRepository = consultantRepository;
     }
 
-    public List<ConsultantModel> getConsultant1() {
+    public List<Consultant> getConsultant1() {
         return consultantRepository.findAll();
     }
 
-    public List<ConsultantModel> getConsultant2() {
+    public List<Consultant> getConsultant2() {
         return List.of(
-                new ConsultantModel(
-                        1,
+                new Consultant(
                         "testConsultantName",
                         "not available",
                         "testprofilePicture",
@@ -34,13 +33,13 @@ public class ConsultantService {
         );
     }
 
-    public void addNewConsultant(ConsultantModel consultantModel) {
-        Optional<ConsultantModel> consultantByName = consultantRepository.
-                findByConsultantName(consultantModel.getConsultantName());
+    public void addNewConsultant(Consultant consultant) {
+        Optional<Consultant> consultantByName = consultantRepository.
+                findByConsultantName(consultant.getConsultantName());
         if (consultantByName.isPresent()) {
             throw new IllegalStateException("name is already taken");
         } else {
-            consultantRepository.save(consultantModel);
+            consultantRepository.save(consultant);
         }
     }
     public void deleteConsultant(Integer consultantId) {
@@ -60,37 +59,37 @@ public class ConsultantService {
             String profilePicture,
             Integer consultantWorkLoad) {
 
-        ConsultantModel consultantModel = consultantRepository.findByConsultantName(consultantName)
+        Consultant consultant = consultantRepository.findByConsultantName(consultantName)
                 .orElseThrow(() -> new IllegalStateException(
-                        "consultantModel with name " + consultantName + " does not exist"));
+                        "consultant with name " + consultantName + " does not exist"));
 
-        Optional<ConsultantModel> consultantOptional = consultantRepository
+        Optional<Consultant> consultantOptional = consultantRepository
                 .findByConsultantName(consultantName);
         if (consultantOptional.isPresent()) {
-            throw new IllegalStateException("consultantModel name already exist");
+            throw new IllegalStateException("consultant name already exist");
         } else {
             if (consultantName != null &&
                     consultantName.length() > 0 &&
-                    !Objects.equals(consultantModel.getConsultantName(), consultantName)) {
-                consultantModel.setConsultantName(consultantName);
+                    !Objects.equals(consultant.getConsultantName(), consultantName)) {
+                consultant.setConsultantName(consultantName);
             }
 
             if (availability != null &&
                     availability.length() > 0 &&
-                    !Objects.equals(consultantModel.getAvailability(), availability)) {
-                consultantModel.setAvailability(availability);
+                    !Objects.equals(consultant.getAvailability(), availability)) {
+                consultant.setAvailability(availability);
             }
 
             if (profilePicture != null &&
                     profilePicture.length() > 0 &&
-                    !Objects.equals(consultantModel.getProfilePicture(), profilePicture)) {
-                consultantModel.setProfilePicture(profilePicture);
+                    !Objects.equals(consultant.getProfilePicture(), profilePicture)) {
+                consultant.setProfilePicture(profilePicture);
             }
 
             if (consultantWorkLoad != null &&
                     consultantWorkLoad > 0 &&
-                    !Objects.equals(consultantModel.getConsultantWorkLoad(), consultantWorkLoad)) {
-                consultantModel.setConsultantWorkLoad(consultantWorkLoad);
+                    !Objects.equals(consultant.getConsultantWorkLoad(), consultantWorkLoad)) {
+                consultant.setConsultantWorkLoad(consultantWorkLoad);
             }
 
         }

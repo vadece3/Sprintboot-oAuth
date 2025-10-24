@@ -12,7 +12,7 @@ public class ProjectConfig {
     @Bean
     CommandLineRunner projectCommandLineRunner(ProjectRepository repository) {
         return args -> {
-            ProjectModel testproject = new ProjectModel(
+            Project testproject = new Project(
                     "testproject",
                     0,
                     0,

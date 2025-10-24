@@ -18,31 +18,12 @@ public class ConsumerService {
         this.consumerRepository = consumerRepository;
     }
 
-    public List<ConsumerModel> getConsumer1() {
+    public List<Consumer> getConsumer1() {
         return consumerRepository.findAll();
     }
 
-    public List<ConsumerModel> getConsumer2() {
-        return List.of(
-                new ConsumerModel(
-                        1,
-                        "testCustomerName",
-                        "testCustomerCity",
-                        "testContactPerson",
-                        "testCustomerAddress",
-                        "testGeolocalisation",
-                        "testDateOfBirth"
-                )
-        );
-    }
-
-    public void addNewConsumer(ConsumerModel consumerModel) {
-        Optional<ConsumerModel> consumerById = consumerRepository.
-                findById(consumerModel.getConsumerId());
-        if (consumerById.isPresent()) {
-            throw new IllegalStateException("Id taken");
-        }
-        consumerRepository.save(consumerModel);
+    public void addNewConsumer(Consumer consumer) {
+        consumerRepository.save(consumer);
     }
 
     public void deleteConsumer(Integer consumerId) {
@@ -65,43 +46,43 @@ public class ConsumerService {
             String geolocalisation,
             String dateOfBirth) {
 
-        ConsumerModel consumerModel = consumerRepository.findById(consumerId)
+        Consumer consumer = consumerRepository.findById(consumerId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "consumerModel with id " + consumerId + " does not exist"));
+                        "consumer with id " + consumerId + " does not exist"));
         if (customerName != null &&
                 customerName.length() > 0 &&
-                !Objects.equals(consumerModel.getCustomerName(), customerName)) {
-            consumerModel.setCustomerName(customerName);
+                !Objects.equals(consumer.getCustomerName(), customerName)) {
+            consumer.setCustomerName(customerName);
         }
 
         if (customerCity != null &&
                 customerCity.length() > 0 &&
-                !Objects.equals(consumerModel.getCustomerCity(), customerCity)) {
-            consumerModel.setCustomerCity(customerCity);
+                !Objects.equals(consumer.getCustomerCity(), customerCity)) {
+            consumer.setCustomerCity(customerCity);
         }
 
         if (profilePicture != null &&
                 profilePicture.length() > 0 &&
-                !Objects.equals(consumerModel.getContactsPerson(), profilePicture)) {
-            consumerModel.setContactsPerson(profilePicture);
+                !Objects.equals(consumer.getContactsPerson(), profilePicture)) {
+            consumer.setContactsPerson(profilePicture);
         }
 
         if (customerAddress != null &&
                 customerAddress.length() > 0 &&
-                !Objects.equals(consumerModel.getCustomerAddress(), customerAddress)) {
-            consumerModel.setCustomerAddress(customerAddress);
+                !Objects.equals(consumer.getCustomerAddress(), customerAddress)) {
+            consumer.setCustomerAddress(customerAddress);
         }
 
         if (geolocalisation != null &&
                 geolocalisation.length() > 0 &&
-                !Objects.equals(consumerModel.getGeolocalisation(), geolocalisation)) {
-            consumerModel.setGeolocalisation(geolocalisation);
+                !Objects.equals(consumer.getGeolocalisation(), geolocalisation)) {
+            consumer.setGeolocalisation(geolocalisation);
         }
 
         if (dateOfBirth != null &&
                 dateOfBirth.length() > 0 &&
-                !Objects.equals(consumerModel.getDateOfBirth(), dateOfBirth)) {
-            consumerModel.setDateOfBirth(dateOfBirth);
+                !Objects.equals(consumer.getDateOfBirth(), dateOfBirth)) {
+            consumer.setDateOfBirth(dateOfBirth);
         }
     }
 

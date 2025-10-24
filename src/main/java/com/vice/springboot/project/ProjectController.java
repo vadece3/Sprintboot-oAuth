@@ -24,20 +24,20 @@ public class ProjectController {
 
     @RequestMapping(path = "api/v1/project1")
     @GetMapping
-    public List<ProjectModel> getProject1() {
+    public List<Project> getProject1() {
         return projectService.getProject1();
     }
 
     @RequestMapping(path = "api/v1/project2")
     @GetMapping
-    public List<ProjectModel> getProject2() {
+    public List<Project> getProject2() {
         return projectService.getProject2();
     }
 
     @RequestMapping(path = "api/v1/storeNewProject")
     @PostMapping
-    public String postProject(@RequestBody ProjectModel projectModel) {
-        projectService.addNewProject(projectModel);
+    public String postProject(@RequestBody Project project) {
+        projectService.addNewProject(project);
         return "New Project Added";
     }
 

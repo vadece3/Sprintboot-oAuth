@@ -24,20 +24,20 @@ public class EntriesController {
 
     @RequestMapping(path = "api/v1/entries1")
     @GetMapping
-    public List<EntriesModel> getEntries1() {
+    public List<Entries> getEntries1() {
         return entriesService.getEntries1();
     }
 
     @RequestMapping(path = "api/v1/entries2")
     @GetMapping
-    public List<EntriesModel> getEntries2() {
+    public List<Entries> getEntries2() {
         return entriesService.getEntries2();
     }
 
     @RequestMapping(path = "api/v1/storeNewEntries")
     @PostMapping
-    public String postEntries(@RequestBody EntriesModel entriesModel) {
-        entriesService.addNewEntries(entriesModel);
+    public String postEntries(@RequestBody Entries entries) {
+        entriesService.addNewEntries(entries);
         return "New Entries Added";
     }
 

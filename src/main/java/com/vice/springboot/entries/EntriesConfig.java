@@ -12,14 +12,14 @@ public class EntriesConfig {
     @Bean
     CommandLineRunner entriesCommandLineRunner(EntriesRepository repository) {
         return args -> {
-            EntriesModel testentries = new EntriesModel(
+            Entries testentries = new Entries(
                     0,
                     0,
                     "",
                     ""
             );
 
-            repository.saveAll(List.of(testentries));
+//            repository.saveAll(List.of(testentries));
         };
     }
 
